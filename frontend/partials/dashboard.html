@@ -1,0 +1,33 @@
+<div class="page fade-slide-in">
+  <section class="dashboard-intro">
+    <div>
+      <p class="section-kicker">Rescue Connect / overview</p>
+      <h2>Welcome back, {{name}} <span class="role-tag" ng-class="role">{{role}}</span></h2>
+      <p class="dashboard-subtitle">Here is what is happening across your rescue community today.</p>
+    </div>
+    <div class="dashboard-mark" aria-hidden="true">&#128062;</div>
+  </section>
+
+  <div ng-if="isAdmin" class="stats-grid">
+    <div class="stat-card stat-card-teal"><span class="stat-icon">&#128101;</span><div class="stat-num">{{stats.volunteerCount || 0}}</div><div class="stat-label">Volunteers</div><small>People making a difference</small></div>
+    <div class="stat-card stat-card-coral"><span class="stat-icon">&#128065;</span><div class="stat-num">{{stats.reportCount || 0}}</div><div class="stat-label">Reports</div><small>Rescue cases recorded</small></div>
+    <div class="stat-card stat-card-gold"><span class="stat-icon">&#10084;</span><div class="stat-num">{{stats.totalDonations || 0}}</div><div class="stat-label">Donations</div><small>Verified contributions</small></div>
+    <div class="stat-card stat-card-ink"><span class="stat-icon">&#8377;</span><div class="stat-num">{{stats.totalAmount | inr}}</div><div class="stat-label">Funds Raised</div><small>Helping care go further</small></div>
+  </div>
+
+  <div ng-if="!isAdmin" class="stats-grid">
+    <div class="stat-card stat-card-teal"><span class="stat-icon">&#9733;</span><div class="stat-num">{{myScore || 0}}</div><div class="stat-label">Your Score</div><small>Your rescue impact points</small></div>
+    <div class="stat-card stat-card-coral"><span class="stat-icon">&#128276;</span><div class="stat-num">{{myNotifications.length || 0}}</div><div class="stat-label">New Notifications</div><small>Updates waiting for you</small></div>
+  </div>
+
+  <section class="dashboard-reports">
+    <div class="section-heading"><div><p class="section-kicker">Live activity</p><h3>Recent animal reports</h3></div><span class="section-badge">Last 5 updates</span></div>
+  <table class="data-table dashboard-table" ng-if="recentReports.length">
+    <tr><th>Animal</th><th>Place</th><th>Status</th></tr>
+    <tr ng-repeat="r in recentReports">
+      <td><span class="animal-dot">&#128062;</span><strong>{{r.animalType}}</strong></td><td>{{r.place}}</td><td><span class="status-text">{{r.status}}</span></td>
+    </tr>
+  </table>
+  <p class="empty-state" ng-if="!recentReports.length">No reports yet.</p>
+  </section>
+</div>

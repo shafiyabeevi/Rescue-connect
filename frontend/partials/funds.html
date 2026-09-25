@@ -1,0 +1,38 @@
+<div class="page fade-slide-in">
+  <h2>💰 Fund Received (Admin Only)</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num">{{totalAmount | inr}}</div><div class="stat-label">Total Verified Funds</div></div>
+    <div class="stat-card"><div class="stat-num">{{donations.length}}</div><div class="stat-label">Donations</div></div>
+    <div class="stat-card"><div class="stat-num">{{users.length}}</div><div class="stat-label">Registered Users</div></div>
+  </div>
+
+  <h3>Donation Details</h3>
+  <table class="data-table" ng-if="donations.length">
+    <tr><th>Donor</th><th>Phone</th><th>Amount</th><th>Method</th><th>UPI/GPay ID</th><th>Txn Ref</th></tr>
+    <tr ng-repeat="d in donations">
+      <td>{{d.name}}</td><td>{{d.phone}}</td><td>{{d.amount | inr}}</td><td>{{d.paymentMethod}}</td><td>{{d.upiId}}</td><td>{{d.txnRef}}</td>
+    </tr>
+  </table>
+
+  <h3>All Registered Users (Volunteers &amp; Admin)</h3>
+  <table class="data-table" ng-if="users.length">
+    <tr><th>Name</th><th>Email</th><th>Phone</th><th>Place</th><th>Role</th><th>Score</th></tr>
+    <tr ng-repeat="u in users">
+      <td>{{u.firstname}} {{u.lastname}}</td><td>{{u.email}}</td><td>{{u.phone}}</td><td>{{u.place}}</td>
+      <td><span class="role-tag" ng-class="u.role">{{u.role}}</span></td><td>{{u.score}}</td>
+    </tr>
+  </table>
+
+  <h3>MySQL Relational Report (payment method breakdown)</h3>
+  <p class="msg-box" ng-class="{success: mysqlConnected}">
+    MySQL status: <strong>{{mysqlConnected ? 'Connected' : 'Not connected'}}</strong>
+  </p>
+  <table class="data-table" ng-if="mysqlRows.length">
+    <tr><th>Payment Method</th><th>Transactions</th><th>Total</th></tr>
+    <tr ng-repeat="r in mysqlRows">
+      <td>{{r.payment_method}}</td><td>{{r.txn_count}}</td><td>{{r.total | inr}}</td>
+    </tr>
+  </table>
+  <p class="sub" ng-if="mysqlWarning">{{mysqlWarning}}</p>
+</div>

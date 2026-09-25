@@ -1,0 +1,16 @@
+<div class="page fade-slide-in">
+  <h2>🏆 Volunteer Leaderboard</h2>
+  <p class="sub">Ranked by rescue activity score (reports submitted, rescues completed, donations facilitated)</p>
+
+  <div class="leaderboard-list" ng-if="!loading">
+    <div class="leaderboard-row" ng-repeat="v in ranking">
+      <div class="rank">{{$index | rankBadge}}</div>
+      <div class="lb-info">
+        <div class="lb-name">{{v.firstname}} {{v.lastname}} <span class="lb-place">({{v.place}})</span></div>
+        <rc-score-bar score="v.score" max="maxScore"></rc-score-bar>
+      </div>
+      <div class="lb-score">{{v.score}} pts</div>
+    </div>
+  </div>
+  <p ng-if="loading">Loading leaderboard...</p>
+</div>

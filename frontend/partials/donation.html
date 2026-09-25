@@ -1,0 +1,31 @@
+<div class="page fade-slide-in">
+  <h2>💚 Donate to Rescue Connect</h2>
+
+  <div class="card" ng-if="step === 1">
+    <form name="donateForm" ng-submit="donate(donateForm)" novalidate>
+      <label>Your Name</label>
+      <input type="text" name="name" ng-model="donation.name" placeholder="Enter your full name" required>
+      <label>Phone Number</label>
+      <input type="text" name="phone" ng-model="donation.phone" placeholder="10-digit mobile number" maxlength="10" required>
+      <label>Your Age</label>
+      <input type="number" name="age" ng-model="donation.age" placeholder="Enter your age" required>
+      <label>Donation Amount (₹)</label>
+      <input type="number" name="amount" ng-model="donation.amount" placeholder="Enter amount to donate" required>
+      <label>Payment Option</label>
+      <select ng-model="donation.paymentMethod" required>
+        <option value="UPI">UPI</option>
+        <option value="GPay">GPay</option>
+      </select>
+      <label>{{donation.paymentMethod}} ID</label>
+      <input type="text" name="upiId" ng-model="donation.upiId" placeholder="e.g. yourname@okhdfcbank" required>
+      <div class="msg-box" ng-if="message">{{message}}</div>
+      <button type="submit" class="btn-primary" ng-disabled="loading">{{loading ? 'Processing...' : 'Donate Now'}}</button>
+    </form>
+  </div>
+
+  <div class="card success-card" ng-if="step === 3">
+    <div class="big-check">✅</div>
+    <h3>{{message}}</h3>
+    <button class="btn-secondary" ng-click="reset()">Make Another Donation</button>
+  </div>
+</div>

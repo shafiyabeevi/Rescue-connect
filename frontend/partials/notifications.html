@@ -1,0 +1,16 @@
+<div class="page fade-slide-in">
+  <h2>🔔 Notifications</h2>
+
+  <div class="notif-list" ng-if="!loading">
+    <div class="notif-item" ng-class="{unread: !n.read}" ng-repeat="n in notifications">
+      <div class="notif-icon">🐾</div>
+      <div class="notif-body">
+        <p>{{n.message}}</p>
+        <span class="notif-time">{{n.createdAt | timeAgo}}</span>
+      </div>
+      <button class="btn-mini" ng-if="!n.read" ng-click="markRead(n)">Mark read</button>
+    </div>
+  </div>
+  <p ng-if="!loading && notifications.length === 0">No notifications yet.</p>
+  <p ng-if="loading">Loading notifications...</p>
+</div>

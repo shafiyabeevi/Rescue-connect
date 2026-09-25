@@ -1,0 +1,24 @@
+<div class="page fade-slide-in">
+  <h2>🚨 Report a Found Animal</h2>
+  <div class="card">
+    <form name="reportForm" ng-submit="submit(reportForm)" novalidate>
+      <label>Description</label>
+      <textarea name="description" ng-model="report.description" placeholder="Describe the animal's condition, behavior, etc." required></textarea>
+
+      <label>Photo of the Animal</label>
+      <rc-image-preview model="report.photo"></rc-image-preview>
+
+      <label>Place Found</label>
+      <input type="text" name="place" ng-model="report.place" placeholder="e.g. Near Anna Nagar bus stop, Madurai" required>
+
+      <label>Animal Type</label>
+      <input type="text" name="animalType" ng-model="report.animalType" placeholder="e.g. Dog, Cat, Bird, Cow" required>
+
+      <label>How Was It Found</label>
+      <input type="text" name="foundHow" ng-model="report.foundHow" placeholder="e.g. Injured on roadside, stray, trapped" required>
+
+      <div class="msg-box" ng-if="message">{{message}}</div>
+      <button type="submit" class="btn-primary" ng-disabled="loading">{{loading ? 'Submitting...' : 'Submit Report'}}</button>
+    </form>
+  </div>
+</div>

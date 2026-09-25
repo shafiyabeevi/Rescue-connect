@@ -1,0 +1,31 @@
+<div class="page fade-slide-in">
+  <section class="food-intro">
+    <div><p class="section-kicker">Care guide / daily essentials</p><h2><span class="food-title-icon">&#127869;</span> Food Details</h2><p class="sub">Simple, reliable feeding guidance for every animal in our care.</p></div>
+    <div class="food-intro-mark" aria-hidden="true">&#128062;</div>
+  </section>
+
+  <div class="card" ng-if="isAdmin">
+    <h3>Add Food Info</h3>
+    <form name="foodForm" ng-submit="addFood(foodForm)" novalidate>
+      <div class="grid-2">
+        <input type="text" ng-model="newFood.animalType" placeholder="Animal type" required>
+        <input type="text" ng-model="newFood.foodName" placeholder="Food name" required>
+        <input type="text" ng-model="newFood.quantity" placeholder="Quantity (e.g. 200g/day)" required>
+        <input type="text" ng-model="newFood.frequency" placeholder="Frequency (e.g. Twice a day)" required>
+      </div>
+      <input type="text" ng-model="newFood.notes" placeholder="Extra notes (optional)">
+      <button type="submit" class="btn-primary">Add Food Info</button>
+    </form>
+  </div>
+
+  <section class="food-list" ng-if="!loading && foods.length">
+    <div class="section-heading"><div><p class="section-kicker">Nutrition schedule</p><h3>What each animal needs</h3></div><span class="section-badge">{{foods.length}} care plans</span></div>
+  <table class="data-table food-table">
+    <tr><th>Animal</th><th>Food</th><th>Quantity</th><th>Frequency</th><th>Notes</th></tr>
+    <tr ng-repeat="f in foods">
+      <td><span class="animal-dot">&#128062;</span><strong>{{f.animalType}}</strong></td><td>{{f.foodName}}</td><td><span class="quantity-pill">{{f.quantity}}</span></td><td>{{f.frequency}}</td><td>{{f.notes || 'Follow standard care plan'}}</td>
+    </tr>
+  </table>
+  </section>
+  <p ng-if="loading">Loading food details...</p>
+</div>

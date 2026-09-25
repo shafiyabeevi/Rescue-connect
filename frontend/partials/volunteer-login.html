@@ -1,0 +1,17 @@
+<div class="auth-wrap fade-slide-in">
+  <div class="auth-card">
+    <div class="auth-icon">🙋</div>
+    <h2>Volunteer Login</h2>
+    <p class="sub">Only registered volunteers can log in</p>
+    <form name="loginForm" ng-submit="submit(loginForm)" novalidate>
+      <label>Email</label>
+      <input type="email" name="email" ng-model="credentials.email" placeholder="you@example.com" required>
+      <label>Password</label>
+      <input type="password" name="password" ng-model="credentials.password" placeholder="Enter your password" required>
+      <div class="error-msg" ng-if="error">{{error}}</div>
+      <button type="submit" class="btn-primary" ng-disabled="loading">{{loading ? 'Signing in...' : 'Login'}}</button>
+    </form>
+    <p class="switch-link">New here? <a href="#!/register">Register as Volunteer</a></p>
+    <p class="switch-link"><a href="#!/admin-login">Admin login &rarr;</a></p>
+  </div>
+</div>

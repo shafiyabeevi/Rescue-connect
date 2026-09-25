@@ -1,0 +1,15 @@
+# Local environment files and secrets
+.env
+*.env
+!.env.example
+backend/.env
+
+# Dependencies and local runtime output
+node_modules/
+npm-debug.log*
+*.log
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/

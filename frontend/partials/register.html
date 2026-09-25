@@ -1,0 +1,60 @@
+<div class="auth-wrap wide fade-slide-in">
+  <div class="auth-card">
+    <div class="auth-icon">📝</div>
+    <h2>Volunteer Registration</h2>
+    <p class="sub">Only registered volunteers can log in to Rescue Connect</p>
+    <form name="regForm" novalidate>
+      <div class="grid-2">
+        <div>
+          <label>First Name</label>
+          <input type="text" ng-model="data.firstname" ng-blur="validateField('firstname')" placeholder="e.g. Arun (min 3 letters)">
+          <span class="field-error" ng-if="errors.firstname">{{errors.firstname}}</span>
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input type="text" ng-model="data.lastname" ng-blur="validateField('lastname')" placeholder="e.g. Kumar">
+          <span class="field-error" ng-if="errors.lastname">{{errors.lastname}}</span>
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <input type="text" ng-model="data.phone" ng-blur="validateField('phone')" placeholder="10-digit mobile number" maxlength="10">
+          <span class="field-error" ng-if="errors.phone">{{errors.phone}}</span>
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" ng-model="data.email" ng-blur="validateField('email')" placeholder="you@example.com">
+          <span class="field-error" ng-if="errors.email">{{errors.email}}</span>
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" ng-model="data.password" ng-blur="validateField('password')" placeholder="Min 8 chars, letters + numbers">
+          <rc-password-strength password="data.password"></rc-password-strength>
+          <span class="field-error" ng-if="errors.password">{{errors.password}}</span>
+        </div>
+        <div>
+          <label>Age</label>
+          <input type="number" ng-model="data.age" ng-blur="validateField('age')" placeholder="Age (18 - 60)">
+          <span class="field-error" ng-if="errors.age">{{errors.age}}</span>
+        </div>
+        <div>
+          <label>Gender</label>
+          <select ng-model="data.gender" ng-change="validateField('gender')">
+            <option value="">-- Select gender --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="field-error" ng-if="errors.gender">{{errors.gender}}</span>
+        </div>
+        <div>
+          <label>Place</label>
+          <input type="text" ng-model="data.place" ng-blur="validateField('place')" placeholder="e.g. Madurai">
+          <span class="field-error" ng-if="errors.place">{{errors.place}}</span>
+        </div>
+      </div>
+      <div class="msg-box" ng-class="{success: success}" ng-if="serverMessage">{{serverMessage}}</div>
+      <button type="button" class="btn-primary" ng-click="submit()" ng-disabled="loading">{{loading ? 'Registering...' : 'Register'}}</button>
+    </form>
+    <p class="switch-link">Already registered? <a href="#!/volunteer-login">Login here</a></p>
+  </div>
+</div>

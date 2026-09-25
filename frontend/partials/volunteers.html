@@ -1,0 +1,15 @@
+<div class="page fade-slide-in">
+  <h2>🙋 Volunteers</h2>
+  <input type="text" class="search-box" ng-model="searchText" placeholder="Search volunteers by name or place...">
+
+  <div class="volunteer-grid" ng-if="!loading">
+    <div class="volunteer-card" ng-repeat="v in volunteers | volunteerSearch:searchText">
+      <div class="avatar">{{v.firstname.charAt(0)}}{{v.lastname.charAt(0)}}</div>
+      <h4>{{v.firstname}} {{v.lastname}}</h4>
+      <p>📍 {{v.place}}</p>
+      <p>⭐ Score: {{v.score}}</p>
+    </div>
+  </div>
+  <p ng-if="!loading && (volunteers | volunteerSearch:searchText).length === 0">No volunteers found.</p>
+  <p ng-if="loading">Loading volunteers...</p>
+</div>

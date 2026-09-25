@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="rescueApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Rescue Connect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-animate.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="NavCtrl">
+
+  <header class="topbar" ng-if="isLoggedIn()">
+    <div class="brand">🐾 Rescue Connect</div>
+    <nav class="nav-links">
+      <a href="#!/dashboard">Dashboard</a>
+      <a href="#!/donation">Donate</a>
+      <a href="#!/report">Report</a>
+      <a href="#!/volunteers">Volunteers</a>
+      <a href="#!/leaderboard">Leaderboard</a>
+      <a href="#!/notifications">Notifications</a>
+      <a href="#!/pets">Pet Booking</a>
+      <a href="#!/food">Food Details</a>
+      <a href="#!/funds" ng-if="isAdmin()">Funds</a>
+    </nav>
+    <div class="user-box">
+      <span>{{userName()}} <em>({{userRole()}})</em></span>
+      <button class="btn-mini" ng-click="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <div ng-view class="view-animate"></div>
+  </main>
+
+  <footer ng-if="isLoggedIn()">
+    <p>Rescue Connect &copy; 2026 — Built with AngularJS, Node.js, Express &amp; MongoDB</p>
+  </footer>
+
+  <!-- App scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/controllers/splashCtrl.js"></script>
+  <script src="js/controllers/loginCtrl.js"></script>
+  <script src="js/controllers/registerCtrl.js"></script>
+  <script src="js/controllers/dashboardCtrl.js"></script>
+  <script src="js/controllers/donationCtrl.js"></script>
+  <script src="js/controllers/reportCtrl.js"></script>
+  <script src="js/controllers/volunteerCtrl.js"></script>
+  <script src="js/controllers/leaderboardCtrl.js"></script>
+  <script src="js/controllers/notificationCtrl.js"></script>
+  <script src="js/controllers/petCtrl.js"></script>
+  <script src="js/controllers/foodCtrl.js"></script>
+  <script src="js/controllers/fundCtrl.js"></script>
+
+  <script>
+    /* NavCtrl - controls the top navigation bar visibility + role-based links */
+    rescueApp.controller('NavCtrl', ['$scope', 'AuthService', '$location', function ($scope, AuthService, $location) {
+      $scope.isLoggedIn = AuthService.isLoggedIn.bind(AuthService);
+      $scope.isAdmin = function () { return AuthService.getRole() === 'admin'; };
+      $scope.userName = AuthService.getName.bind(AuthService);
+      $scope.userRole = AuthService.getRole.bind(AuthService);
+      $scope.logout = function () {
+        AuthService.logout();
+        $location.path('/volunteer-login');
+      };
+    }]);
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<div class="page fade-slide-in">
+  <h2>🐕 Pet Booking / Adoption</h2>
+
+  <div class="card" ng-if="isAdmin">
+    <h3>Add New Pet</h3>
+    <form name="petForm" ng-submit="addPet(petForm)" novalidate>
+      <div class="grid-2">
+        <input type="text" ng-model="newPet.name" placeholder="Pet name" required>
+        <input type="text" ng-model="newPet.animalType" placeholder="Animal type (Dog, Cat...)" required>
+        <input type="number" ng-model="newPet.age" placeholder="Age (years)" required>
+        <input type="text" ng-model="newPet.foodDetails" placeholder="Food details">
+      </div>
+      <rc-image-preview model="newPet.image"></rc-image-preview>
+      <button type="submit" class="btn-primary">Add Pet</button>
+    </form>
+  </div>
+
+  <div class="pet-grid" ng-if="!loading">
+    <div class="pet-card" ng-repeat="p in pets">
+      <img ng-src="{{p.image || 'https://via.placeholder.com/300x200?text=' + p.animalType}}" class="pet-img">
+      <div class="pet-info">
+        <h4>{{p.name}} <rc-status-pill status="p.availability"></rc-status-pill></h4>
+        <p>🐾 {{p.animalType}} • Age: {{p.age}}</p>
+        <p class="pet-food">🍖 {{p.foodDetails}}</p>
+        <button class="btn-secondary" ng-if="p.availability === 'Available'" ng-click="book(p)">Book this Pet</button>
+      </div>
+    </div>
+  </div>
+  <p ng-if="loading">Loading pets...</p>
+</div>
